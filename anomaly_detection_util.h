@@ -27,8 +27,15 @@ public:
 
 class Point{
 public:
-	const float x,y;
+	float x,y;
+	Point():x(0),y(0){};
 	Point(float x, float y):x(x),y(y){}
+	void setX(int x){
+		this->x = x;
+	}
+	void setY(int y){
+		this->y = y;
+	}
 };
 
 // performs a linear regression and returns the line equation

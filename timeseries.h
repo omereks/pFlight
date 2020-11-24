@@ -24,7 +24,11 @@ public:
 	TimeSeries(const char* CSVfileName) : fileName(CSVfileName){
         this->creatVectorFromCSV(CSVfileName);
 	}
-
+	TimeSeries(const TimeSeries &ts2) {
+		fileName = ts2.fileName;
+		features = ts2.features;
+		vecCSV = ts2.vecCSV;
+	} 
 	float getVal(int r, int c);
 
     vector<float> getRow(int r);

@@ -72,11 +72,11 @@ int main(){
 	//	A-C: y=a1*x+b1
 	//	B-D: y=a2*x+b2
 
-	//generateTrainCSV(a1,b1,a2,b2);
+	generateTrainCSV(a1,b1,a2,b2);
 	cout<<"creat ts"<<endl;
 	TimeSeries ts("trainFile2.csv");
 	float abcc = ts.getVal(1,1);
-	
+	///check
 	float arr[ts.vecCSV.size()];
 	ts.getColumn(arr, 0);
 	
@@ -85,8 +85,8 @@ int main(){
 	
 	float ch = pearson(arr,arr2,ts.vecCSV.size());
 
-	cout<<abcc<<endl;
-//	SimpleAnomalyDetector ad;
+	cout<<ch<<endl;
+	//SimpleAnomalyDetector ad;
 //	ad.learnNormal(ts);
 //	vector<correlatedFeatures> cf=ad.getNormalModel();
 /**
