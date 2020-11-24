@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/omer/BIU/pFlight/anomaly_detection_util.cpp
+anomaly_detection_util.h
+/home/omer/BIU/pFlight/anomaly_detection_util.h
+cmath
+-
+iostream
+-
+stdlib.h
+-
+
+/home/omer/BIU/pFlight/anomaly_detection_util.h
+
