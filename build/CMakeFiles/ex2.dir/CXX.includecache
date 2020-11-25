@@ -16,6 +16,14 @@ timeseries.h
 math.h
 /home/omer/BIU/pFlight/math.h
 
+/home/omer/BIU/pFlight/SimpleAnomalyDetector.cpp
+SimpleAnomalyDetector.h
+/home/omer/BIU/pFlight/SimpleAnomalyDetector.h
+timeseries.h
+/home/omer/BIU/pFlight/timeseries.h
+anomaly_detection_util.h
+/home/omer/BIU/pFlight/anomaly_detection_util.h
+
 /home/omer/BIU/pFlight/SimpleAnomalyDetector.h
 anomaly_detection_util.h
 /home/omer/BIU/pFlight/anomaly_detection_util.h
@@ -31,26 +39,6 @@ math.h
 -
 
 /home/omer/BIU/pFlight/anomaly_detection_util.h
-
-/home/omer/BIU/pFlight/main.cpp
-iostream
--
-vector
--
-AnomalyDetector.h
-/home/omer/BIU/pFlight/AnomalyDetector.h
-SimpleAnomalyDetector.h
-/home/omer/BIU/pFlight/SimpleAnomalyDetector.h
-anomaly_detection_util.h
-/home/omer/BIU/pFlight/anomaly_detection_util.h
-fstream
--
-stdlib.h
--
-time.h
--
-math.h
--
 
 /home/omer/BIU/pFlight/timeseries.h
 iostream

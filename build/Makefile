@@ -520,6 +520,33 @@ ex2/fast:
 	$(MAKE) -f CMakeFiles/ex2.dir/build.make CMakeFiles/ex2.dir/build
 .PHONY : ex2/fast
 
+SimpleAnomalyDetector.o: SimpleAnomalyDetector.cpp.o
+
+.PHONY : SimpleAnomalyDetector.o
+
+# target to build an object file
+SimpleAnomalyDetector.cpp.o:
+	$(MAKE) -f CMakeFiles/ex2.dir/build.make CMakeFiles/ex2.dir/SimpleAnomalyDetector.cpp.o
+.PHONY : SimpleAnomalyDetector.cpp.o
+
+SimpleAnomalyDetector.i: SimpleAnomalyDetector.cpp.i
+
+.PHONY : SimpleAnomalyDetector.i
+
+# target to preprocess a source file
+SimpleAnomalyDetector.cpp.i:
+	$(MAKE) -f CMakeFiles/ex2.dir/build.make CMakeFiles/ex2.dir/SimpleAnomalyDetector.cpp.i
+.PHONY : SimpleAnomalyDetector.cpp.i
+
+SimpleAnomalyDetector.s: SimpleAnomalyDetector.cpp.s
+
+.PHONY : SimpleAnomalyDetector.s
+
+# target to generate assembly for a file
+SimpleAnomalyDetector.cpp.s:
+	$(MAKE) -f CMakeFiles/ex2.dir/build.make CMakeFiles/ex2.dir/SimpleAnomalyDetector.cpp.s
+.PHONY : SimpleAnomalyDetector.cpp.s
+
 anomaly_detection_util.o: anomaly_detection_util.cpp.o
 
 .PHONY : anomaly_detection_util.o
@@ -641,6 +668,9 @@ help:
 	@echo "... ContinuousSubmit"
 	@echo "... NightlyConfigure"
 	@echo "... ex2"
+	@echo "... SimpleAnomalyDetector.o"
+	@echo "... SimpleAnomalyDetector.i"
+	@echo "... SimpleAnomalyDetector.s"
 	@echo "... anomaly_detection_util.o"
 	@echo "... anomaly_detection_util.i"
 	@echo "... anomaly_detection_util.s"

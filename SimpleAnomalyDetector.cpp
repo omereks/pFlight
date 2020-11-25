@@ -42,16 +42,15 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 				Point * pArr[ts2.vecCSV.size()];
 				for (int k = 0; k < ts2.vecCSV.size(); k++)
 				{
-					pArr[k].setX(arr[k]);
-					pArr[k].setY(arr2[k]);
+					pArr[k]->setX(arr[k]);
+					pArr[k]->setY(arr2[k]);
 
 				}
-				
-
 				Line lin_reg = linear_reg(pArr, ts2.vecCSV.size());
 
 				
-				//correlatedFeatures corToAdd()
+				correlatedFeatures corToAdd(feature1, feature2, corrlation, lin_reg, threshold);
+				this->cf.push_back(corToAdd);
 			}
 			
 

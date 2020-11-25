@@ -13,5 +13,10 @@
   "directory": "/home/omer/BIU/pFlight/build",
   "command": "/bin/g++-9    -g   -o CMakeFiles/ex2.dir/anomaly_detection_util.cpp.o -c /home/omer/BIU/pFlight/anomaly_detection_util.cpp",
   "file": "/home/omer/BIU/pFlight/anomaly_detection_util.cpp"
+},
+{
+  "directory": "/home/omer/BIU/pFlight/build",
+  "command": "/bin/g++-9    -g   -o CMakeFiles/ex2.dir/SimpleAnomalyDetector.cpp.o -c /home/omer/BIU/pFlight/SimpleAnomalyDetector.cpp",
+  "file": "/home/omer/BIU/pFlight/SimpleAnomalyDetector.cpp"
 }
 ]
