@@ -4,20 +4,6 @@
 #include <vector>
 #include "AnomalyDetector.h"
 #include "SimpleAnomalyDetector.h"
-#include "anomaly_detection_util.h"
-#include <fstream>
-#include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
-#include <math.h>
-
-
-using namespace std;
-
-
-#include <iostream>
-#include <vector>
-#include "AnomalyDetector.h"
-#include "SimpleAnomalyDetector.h"
 #include <fstream>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
@@ -85,19 +71,7 @@ int main(){
 	//	B-D: y=a2*x+b2
 
 	generateTrainCSV(a1,b1,a2,b2);
-	cout<<"creat ts"<<endl;
 	TimeSeries ts("trainFile1.csv");
-	float abcc = ts.getVal(1,1);
-	///check
-	float arr[ts.vecCSV.size()];
-	ts.getColumn(arr, 0);
-	
-	float arr2[ts.vecCSV.size()];
-	ts.getColumn(arr2, 1);
-	
-	float ch = pearson(arr,arr2,ts.vecCSV.size());
-
-	cout<<ch<<endl;
 	SimpleAnomalyDetector ad;
 	ad.learnNormal(ts);
 	vector<correlatedFeatures> cf=ad.getNormalModel();
@@ -131,7 +105,7 @@ int main(){
 
 	if(falseAlarms>0)
 		cout<<"you have "<<falseAlarms<<" false alarms (-"<<min(30,falseAlarms*3)<<")"<<endl;
-	
+
 	cout<<"done"<<endl;
 	return 0;
 }

@@ -33,7 +33,9 @@ public:
 
     vector<float> getRow(int r);
 
-    void getColumn(float* arrC, int c);
+	int foundC(string s);
+
+    vector<float> getColumn(int c);
 
     void addRow(float a, float b, float c, float d);
 

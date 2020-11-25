@@ -39,14 +39,23 @@ vector<float> TimeSeries::getRow(int r){
     return (this->vecCSV[r]);
 }
 
-void TimeSeries::getColumn(float* arrC, int c){
-    vector<float> curVec;
-    float curVal;
-    int i = 0;
-    for (int i = 0 ; i < this->vecCSV.size() ; i++)
+int TimeSeries::foundC(string s){
+    for (int i = 0; i < this->features.size(); i++)
     {
-        arrC[i] = this->vecCSV[i][c];
+        if(this->features[i] == s)
+            return i;
     }
+    return -1;
+}
+
+vector<float> TimeSeries::getColumn(int c){
+    vector<float> retVec;
+    for (int i = 0; i < this->vecCSV.size(); i++)
+    {
+        float val = this->vecCSV[i][c];
+        retVec.push_back(val);
+    }
+    return retVec;
 }
 
 void TimeSeries::addRow(float a, float b, float c, float d){
@@ -58,8 +67,6 @@ void TimeSeries::addRow(float a, float b, float c, float d){
 
     this->vecCSV.push_back(vecAdd);
 }
-
-
 
 
 

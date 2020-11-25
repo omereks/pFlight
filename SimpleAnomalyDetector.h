@@ -15,9 +15,12 @@ struct correlatedFeatures{
 	float corrlation;
 	Line lin_reg;
 	float threshold;
-	Point * arrp;
+	Point  *arrp;
 	int sizeOfPoints;
 	
+	int getSizeOfPoints(){
+		return this->sizeOfPoints;
+	}
 
 	correlatedFeatures(string feature1, string feature2, float corrlation, Line lin_reg, float threshold, Point * arrp, int sizeOfPoints):
 	feature1(feature1), feature2(feature2), corrlation(corrlation), lin_reg(lin_reg), threshold(threshold), arrp(arrp), sizeOfPoints(sizeOfPoints){}
