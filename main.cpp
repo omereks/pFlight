@@ -13,9 +13,21 @@
 
 using namespace std;
 
+
+#include <iostream>
+#include <vector>
+#include "AnomalyDetector.h"
+#include "SimpleAnomalyDetector.h"
+#include <fstream>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+#include <math.h>
+
+using namespace std;
+
 // this is a simple test to put you on the right track
 void generateTrainCSV(float a1,float b1, float a2, float b2){
-	ofstream out("trainFile2.csv");
+	ofstream out("trainFile1.csv");
 	out<<"A,B,C,D"<<endl;
 	Line ac(a1,b1);
 	Line bd(a2,b2);
@@ -74,7 +86,7 @@ int main(){
 
 	generateTrainCSV(a1,b1,a2,b2);
 	cout<<"creat ts"<<endl;
-	TimeSeries ts("trainFile2.csv");
+	TimeSeries ts("trainFile1.csv");
 	float abcc = ts.getVal(1,1);
 	///check
 	float arr[ts.vecCSV.size()];
@@ -86,10 +98,10 @@ int main(){
 	float ch = pearson(arr,arr2,ts.vecCSV.size());
 
 	cout<<ch<<endl;
-	//SimpleAnomalyDetector ad;
-//	ad.learnNormal(ts);
-//	vector<correlatedFeatures> cf=ad.getNormalModel();
-/**
+	SimpleAnomalyDetector ad;
+	ad.learnNormal(ts);
+	vector<correlatedFeatures> cf=ad.getNormalModel();
+
 	if(cf.size()!=2)
 		cout<<"wrong size of correlated features (-40)"<<endl;
 	else
@@ -119,7 +131,7 @@ int main(){
 
 	if(falseAlarms>0)
 		cout<<"you have "<<falseAlarms<<" false alarms (-"<<min(30,falseAlarms*3)<<")"<<endl;
-	*/
+	
 	cout<<"done"<<endl;
 	return 0;
 }

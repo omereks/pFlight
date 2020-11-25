@@ -34,22 +34,30 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 
 			corrlation = pearson(arr,arr2,ts.vecCSV.size());
 
-			if (corrlation>threshold)
+			if (corrlation>0.9)
 			{
 				string feature1 = ts2.features[i];
 				string feature2 = ts2.features[j];
 				
-				Point * pArr[ts2.vecCSV.size()];
-				for (int k = 0; k < ts2.vecCSV.size(); k++)
+				Point * pArr[ts2.vecCSV.size()] = {};
+				float maxDev = 0;
+				for (int t = 0; t < ts2.vecCSV.size(); t++)
 				{
-					pArr[k]->setX(arr[k]);
-					pArr[k]->setY(arr2[k]);
-
+					pArr[t] = new Point(arr[t], arr2[t]);
 				}
 				Line lin_reg = linear_reg(pArr, ts2.vecCSV.size());
 
-				
-				correlatedFeatures corToAdd(feature1, feature2, corrlation, lin_reg, threshold);
+				for (int k = 0; k < ts2.vecCSV.size(); k++)
+				{
+					float curDev = dev(*pArr[k], lin_reg);
+					if (curDev > maxDev)
+					{
+						maxDev = curDev;
+					}
+				}
+
+
+				correlatedFeatures corToAdd(feature1, feature2, corrlation, lin_reg, maxDev*1.1, *pArr, ts2.vecCSV.size());
 				this->cf.push_back(corToAdd);
 			}
 			
@@ -62,6 +70,24 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 }
 
 vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
+	vector<AnomalyReport>  vecAnomalyRet;
+	TimeSeries ts3(ts);
+	//each vector
+	for (int i = 0; i < this->cf.size(); i++)
+	{
+		//make point for each cf
+		for (int j = 0; j < this->cf[i].sizeOfPoints ; j++)
+		{
+			if(dev(this->cf[i].arrp[j], this->cf[i].lin_reg)  > this->cf[i].corrlation)
+			{
+				string description = this->cf[i].feature1 + "-" + this->cf[i].feature2;
+				long timeStep = ts3.getVal(j,0);
+				vecAnomalyRet.push_back(AnomalyReport(description, timeStep));
+			} 
+		}
+		
+	}
+	return vecAnomalyRet;
 	// TODO Auto-generated destructor stub
 }
 
