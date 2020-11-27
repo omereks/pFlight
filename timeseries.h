@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <vector>
 #include <fstream>
+#include <sstream>
 #include <string>
 using namespace std;
 

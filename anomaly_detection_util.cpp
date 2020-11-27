@@ -2,7 +2,15 @@
 #include <cmath>
 #include <iostream>
 #include <stdlib.h>
+#include <vector>
 using namespace std;
+
+float avg(float* x, int size){
+	float sum=0;
+	for(int i=0;i<size;sum+=x[i],i++);
+	return sum/size;
+}
+
 
 //getting avg of array
 static float getAvg(float* x, int size) {
@@ -20,50 +28,65 @@ static float getAvg(float* x, int size) {
 
 
 float var(float* x, int size) {
-    //crate xPow by 2
-    float sumXPow = 0;
-    for(int i=0 ; i<size ; i++) {
-        sumXPow += pow(x[i], 2);
-    }  
-    float ret = sumXPow/size - pow(getAvg(x, size), 2);
-    return ret;
+    float av=avg(x,size);
+	float sum=0;
+	for(int i=0;i<size;i++){
+		sum+=x[i]*x[i];
+	}
+	return sum/size - av*av;
 }
 
 float cov(float* x, float* y, int size) {
-    //crate xyArray
-    float xyArray[size];
-    for(int i=0 ; i<size ; i++) {
-        xyArray[i] = x[i]*y[i];
-    }
-
-    return getAvg(xyArray,size) - (getAvg(x,size) * getAvg(y,size));
+    float sum=0;
+	for(int i=0;i<size;i++){
+		sum+=x[i]*y[i];
+	}
+	sum/=size;
+    return sum - avg(x,size)*avg(y,size);
 }
 
 float pearson(float* x, float* y, int size) {
-    return (cov(x, y, size)) / (sqrt( var(x , size) ) * (sqrt( var(y , size) )));
+    return cov(x,y,size)/(sqrt(var(x,size))*sqrt(var(y,size)));
 }
 
+Line linear_reg(vector<Point> points) {
+    int size = points.size();
+	float x[size],y[size];
+	for(int i=0;i<size;i++)
+	{
+		x[i] = points[i].x;
+		y[i] = points[i].y;
+	}
+	float a=cov(x,y,size)/var(x,size);
+	float b=avg(y,size) - a*(avg(x,size));
+
+	return Line(a,b);
+}
+
+
 Line linear_reg(Point** points, int size){
-    float a, b;
-    float xP[size], yP[size];
-    //extract x and y from points into array
-    for(int i=0 ; i<size ; i++) {
-        xP[i] = points[i]->x;
-        yP[i] = points[i]->y;
-    } 
-    a = cov(xP, yP, size) / var(xP , size);
-    b = getAvg(yP, size) - a*getAvg(xP, size);
-    return Line(a, b);
+    float x[size],y[size];
+	for(int i=0;i<size;i++){
+		x[i]=points[i]->x;
+		y[i]=points[i]->y;
+	}
+	float a=cov(x,y,size)/var(x,size);
+	float b=avg(y,size) - a*(avg(x,size));
+
+	return Line(a,b);
 }
 
 float dev(Point p,Point** points, int size){
-    Line curLine = linear_reg(points , size);
-return dev(p, curLine);
+    Line l=linear_reg(points,size);
+	return dev(p,l);
 
 }
 
 float dev(Point p,Line l) {
-    return abs(l.f(p.x) - p.y);
+    float x=p.y-l.f(p.x);
+	if(x<0)
+		x*=-1;
+	return x;
 }
 
 
