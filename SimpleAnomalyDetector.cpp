@@ -19,12 +19,20 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 	float corrlation;
 	int numOfC = ts2.features.size();
 
+
+	string feature1;
+	string feature2;
+	vector<Point>  pointsVec;
+	Line lin_reg;
+	float maxDev = 0;
+
+
 	for (int i = 0; i < numOfC ; i++)
 	{
 		bool flagFoundCor = false;
 		int iCor = -1;
 		int jCor = -1;
-		int CorMax = 0;
+		float CorMax = 0;
 
 		for (int j=i+1; j < numOfC; j++)
 		{
@@ -49,6 +57,30 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 					flagFoundCor = true;
 					iCor = i;
 					jCor = j;
+					feature1 = ts2.features[i];
+					feature2 = ts2.features[j];
+					CorMax = corrlation;
+					
+					//making a line from all the points	and make it an array			
+					pointsVec.clear();
+					for (int p = 0; p < v.size(); p++)
+					{
+						Point pCor(arr[p], arr2[p]);
+						pointsVec.push_back(pCor);
+					}
+					//creat the line
+					lin_reg = linear_reg(pointsVec);
+
+
+					maxDev = 0;
+					for (int k = 0; k < pointsVec.size(); k++)
+					{
+						float curDev = dev(pointsVec[k], lin_reg);
+						if (curDev > maxDev)
+						{
+							maxDev = curDev;
+						}
+					}
 				}
 				
 				
@@ -66,38 +98,15 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 
 
 				// names of the correlated features
-				string feature1 = ts2.features[i];
-				string feature2 = ts2.features[j];
-
-				//making a line from all the points	and make it an array			
-				vector<Point>  pointsVec;
-				for (int p = 0; p < v.size(); p++)
-				{
-					Point pCor(arr[p], arr2[p]);
-					pointsVec.push_back(pCor);
-				}
 				
-				//creat the line
-				Line lin_reg = linear_reg(pointsVec);
 
 				
-				float maxDev = 0;
-				for (int k = 0; k < pointsVec.size(); k++)
-				{
-					float curDev = dev(pointsVec[k], lin_reg);
-					if (curDev > maxDev)
-					{
-						maxDev = curDev;
-					}
-				}
-
-				maxDev;
-
-				correlatedFeatures corToAdd(feature1, feature2, corrlation, lin_reg, maxDev, pointsVec, v.size());
-				this->cf.push_back(corToAdd);
 			}
-			
-
+		}
+		if(flagFoundCor){
+			correlatedFeatures corToAdd(feature1, feature2, CorMax, lin_reg, maxDev, pointsVec, numOfC);
+			this->cf.push_back(corToAdd);
+			flagFoundCor = false;
 		}
 	}
 	
