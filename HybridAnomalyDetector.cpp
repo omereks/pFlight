@@ -12,11 +12,11 @@ HybridAnomalyDetector::~HybridAnomalyDetector() {
 }
 
 bool HybridAnomalyDetector::checkIfAnomaly(vector<Point> vecPointOfDetect, int i, int j){
-	if (this->cf[i].threshold >= CorrelationThreshold)
+	if (this->cf[i].corrlation >= CorrelationThreshold)
 	{
 		return SimpleAnomalyDetector::checkIfAnomaly(vecPointOfDetect, i, j);
 	}
-	if (this->cf[i].threshold >= 0.5)
+	if (this->cf[i].corrlation >= 0.5)
 	{
 		this->cf[i].circleCF = minidisc(vecPointOfDetect, { }, vecPointOfDetect.size());
 		this->cf[i].circleCF.setRadius(this->cf[i].circleCF.getRadius()* 1.1 );

@@ -23,12 +23,14 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 	string feature2;
 	vector<Point>  pointsVec;
 	Line lin_reg;
+	Circle circ;
 	float maxDev = 0;
 
 
 	for (int i = 0; i < numOfC ; i++)
 	{
 		bool flagFoundCor = false;
+		bool flagFoundCorCircle = false;
 		int iCor = -1;
 		int jCor = -1;
 		float CorMax = 0;
@@ -49,6 +51,8 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 
 
 			//check if the corraltion is good
+
+			
 			if ((corrlation > this->CorrelationThreshold) || (corrlation<((-1)*this->CorrelationThreshold)))
 			{
 				if (CorMax<corrlation)
@@ -101,9 +105,50 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 
 				
 			}
+			if ((corrlation < this->CorrelationThreshold) && (corrlation >= 0.5))
+			{
+				if (CorMax<corrlation)
+				{
+					flagFoundCorCircle = true;
+					iCor = i;
+					jCor = j;
+					feature1 = ts2.features[i];
+					feature2 = ts2.features[j];
+					CorMax = corrlation;
+					
+					//making a line from all the points	and make it an array			
+					pointsVec.clear();
+					for (int p = 0; p < v.size(); p++)
+					{
+						Point pCor(arr[p], arr2[p]);
+						pointsVec.push_back(pCor);
+					}
+					circ = minidisc(pointsVec, { }, pointsVec.size());
+					circ.setRadius(this->cf[i].circleCF.getRadius()* 1.1 );
+					
+					lin_reg = linear_reg(pointsVec);
+
+
+					maxDev = 0;
+					for (int k = 0; k < pointsVec.size(); k++)
+					{
+						float curDev = dev(pointsVec[k], lin_reg);
+						if (curDev > maxDev)
+						{
+							maxDev = curDev;
+						}
+					}
+				}
+			}
+
 		}
 		if(flagFoundCor){
 			correlatedFeatures corToAdd(feature1, feature2, CorMax, lin_reg, maxDev, pointsVec, numOfC);
+			this->cf.push_back(corToAdd);
+			flagFoundCor = false;
+		}
+		if(flagFoundCorCircle){
+			correlatedFeatures corToAdd(feature1, feature2, CorMax, lin_reg, maxDev, pointsVec, numOfC, circ);
 			this->cf.push_back(corToAdd);
 			flagFoundCor = false;
 		}
