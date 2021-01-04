@@ -4,9 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/omer/BIU/pFlight/HybridAnomalyDetector.cpp" "/home/omer/BIU/pFlight/build/CMakeFiles/ex2.dir/HybridAnomalyDetector.cpp.o"
+  "/home/omer/BIU/pFlight/MainTrain.cpp" "/home/omer/BIU/pFlight/build/CMakeFiles/ex2.dir/MainTrain.cpp.o"
   "/home/omer/BIU/pFlight/SimpleAnomalyDetector.cpp" "/home/omer/BIU/pFlight/build/CMakeFiles/ex2.dir/SimpleAnomalyDetector.cpp.o"
   "/home/omer/BIU/pFlight/anomaly_detection_util.cpp" "/home/omer/BIU/pFlight/build/CMakeFiles/ex2.dir/anomaly_detection_util.cpp.o"
-  "/home/omer/BIU/pFlight/main.cpp" "/home/omer/BIU/pFlight/build/CMakeFiles/ex2.dir/main.cpp.o"
   "/home/omer/BIU/pFlight/timeseries.cpp" "/home/omer/BIU/pFlight/build/CMakeFiles/ex2.dir/timeseries.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

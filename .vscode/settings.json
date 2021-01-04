@@ -10,7 +10,9 @@
         "string_view": "cpp",
         "memory": "cpp",
         "initializer_list": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "type_traits": "cpp"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/."
 }

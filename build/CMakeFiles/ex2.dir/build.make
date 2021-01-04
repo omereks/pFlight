@@ -57,18 +57,18 @@ include CMakeFiles/ex2.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/ex2.dir/flags.make
 
-CMakeFiles/ex2.dir/main.cpp.o: CMakeFiles/ex2.dir/flags.make
-CMakeFiles/ex2.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/omer/BIU/pFlight/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ex2.dir/main.cpp.o"
-	/bin/g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ex2.dir/main.cpp.o -c /home/omer/BIU/pFlight/main.cpp
+CMakeFiles/ex2.dir/MainTrain.cpp.o: CMakeFiles/ex2.dir/flags.make
+CMakeFiles/ex2.dir/MainTrain.cpp.o: ../MainTrain.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/omer/BIU/pFlight/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ex2.dir/MainTrain.cpp.o"
+	/bin/g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ex2.dir/MainTrain.cpp.o -c /home/omer/BIU/pFlight/MainTrain.cpp
 
-CMakeFiles/ex2.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ex2.dir/main.cpp.i"
-	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/omer/BIU/pFlight/main.cpp > CMakeFiles/ex2.dir/main.cpp.i
+CMakeFiles/ex2.dir/MainTrain.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ex2.dir/MainTrain.cpp.i"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/omer/BIU/pFlight/MainTrain.cpp > CMakeFiles/ex2.dir/MainTrain.cpp.i
 
-CMakeFiles/ex2.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ex2.dir/main.cpp.s"
-	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/omer/BIU/pFlight/main.cpp -o CMakeFiles/ex2.dir/main.cpp.s
+CMakeFiles/ex2.dir/MainTrain.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ex2.dir/MainTrain.cpp.s"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/omer/BIU/pFlight/MainTrain.cpp -o CMakeFiles/ex2.dir/MainTrain.cpp.s
 
 CMakeFiles/ex2.dir/timeseries.cpp.o: CMakeFiles/ex2.dir/flags.make
 CMakeFiles/ex2.dir/timeseries.cpp.o: ../timeseries.cpp
@@ -109,23 +109,38 @@ CMakeFiles/ex2.dir/SimpleAnomalyDetector.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ex2.dir/SimpleAnomalyDetector.cpp.s"
 	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/omer/BIU/pFlight/SimpleAnomalyDetector.cpp -o CMakeFiles/ex2.dir/SimpleAnomalyDetector.cpp.s
 
+CMakeFiles/ex2.dir/HybridAnomalyDetector.cpp.o: CMakeFiles/ex2.dir/flags.make
+CMakeFiles/ex2.dir/HybridAnomalyDetector.cpp.o: ../HybridAnomalyDetector.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/omer/BIU/pFlight/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ex2.dir/HybridAnomalyDetector.cpp.o"
+	/bin/g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ex2.dir/HybridAnomalyDetector.cpp.o -c /home/omer/BIU/pFlight/HybridAnomalyDetector.cpp
+
+CMakeFiles/ex2.dir/HybridAnomalyDetector.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ex2.dir/HybridAnomalyDetector.cpp.i"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/omer/BIU/pFlight/HybridAnomalyDetector.cpp > CMakeFiles/ex2.dir/HybridAnomalyDetector.cpp.i
+
+CMakeFiles/ex2.dir/HybridAnomalyDetector.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ex2.dir/HybridAnomalyDetector.cpp.s"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/omer/BIU/pFlight/HybridAnomalyDetector.cpp -o CMakeFiles/ex2.dir/HybridAnomalyDetector.cpp.s
+
 # Object files for target ex2
 ex2_OBJECTS = \
-"CMakeFiles/ex2.dir/main.cpp.o" \
+"CMakeFiles/ex2.dir/MainTrain.cpp.o" \
 "CMakeFiles/ex2.dir/timeseries.cpp.o" \
 "CMakeFiles/ex2.dir/anomaly_detection_util.cpp.o" \
-"CMakeFiles/ex2.dir/SimpleAnomalyDetector.cpp.o"
+"CMakeFiles/ex2.dir/SimpleAnomalyDetector.cpp.o" \
+"CMakeFiles/ex2.dir/HybridAnomalyDetector.cpp.o"
 
 # External object files for target ex2
 ex2_EXTERNAL_OBJECTS =
 
-ex2: CMakeFiles/ex2.dir/main.cpp.o
+ex2: CMakeFiles/ex2.dir/MainTrain.cpp.o
 ex2: CMakeFiles/ex2.dir/timeseries.cpp.o
 ex2: CMakeFiles/ex2.dir/anomaly_detection_util.cpp.o
 ex2: CMakeFiles/ex2.dir/SimpleAnomalyDetector.cpp.o
+ex2: CMakeFiles/ex2.dir/HybridAnomalyDetector.cpp.o
 ex2: CMakeFiles/ex2.dir/build.make
 ex2: CMakeFiles/ex2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/omer/BIU/pFlight/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable ex2"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/omer/BIU/pFlight/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable ex2"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ex2.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

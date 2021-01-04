@@ -5,8 +5,7 @@
 
 
 SimpleAnomalyDetector::SimpleAnomalyDetector() {
-	// TODO Auto-generated constructor stub
-
+	CorrelationThreshold = 0.9;
 }
 
 SimpleAnomalyDetector::~SimpleAnomalyDetector() {
@@ -18,8 +17,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 	TimeSeries ts2(ts);
 	float corrlation;
 	int numOfC = ts2.features.size();
-
-
+	
 	string feature1;
 	string feature2;
 	vector<Point>  pointsVec;
@@ -50,7 +48,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 
 
 			//check if the corraltion is good
-			if ((corrlation>0.9) || (corrlation<(-0.9)))
+			if ((corrlation > this->CorrelationThreshold) || (corrlation<((-1)*this->CorrelationThreshold)))
 			{
 				if (CorMax<corrlation)
 				{
@@ -114,6 +112,20 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 
 }
 
+bool SimpleAnomalyDetector::checkIfAnomaly(vector<Point> vecPointOfDetect, int i, int j){
+	//getting one = dev from point to our line
+	float one = (dev(vecPointOfDetect[j], this->cf[i].lin_reg));
+	//from learning
+	float tow = this->cf[i].threshold;
+	tow = tow * 1.2;
+	if(one  > tow)
+	{
+		return true;
+	}
+	return false;
+}
+
+
 vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
 	vector<AnomalyReport>  vecAnomalyRet;
 	
@@ -144,12 +156,8 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
 		//check every points dec
 		for (int j = 0; j < vecPointOfDetect.size() ; j++)
 		{			
-			//getting one = dev from point to our line
-			float one = (dev(vecPointOfDetect[j], this->cf[i].lin_reg));
-			//from learning
-			float tow = this->cf[i].threshold;
-			tow = tow * 1.2;
-			if(one  > tow)
+			
+			if(checkIfAnomaly(vecPointOfDetect, i , j))
 			{
 				string description = this->cf[i].feature1 + "-" + this->cf[i].feature2;
 				long timeStep = j+1;

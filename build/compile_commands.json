@@ -1,8 +1,8 @@
 [
 {
   "directory": "/home/omer/BIU/pFlight/build",
-  "command": "/bin/g++-9    -g   -o CMakeFiles/ex2.dir/main.cpp.o -c /home/omer/BIU/pFlight/main.cpp",
-  "file": "/home/omer/BIU/pFlight/main.cpp"
+  "command": "/bin/g++-9    -g   -o CMakeFiles/ex2.dir/MainTrain.cpp.o -c /home/omer/BIU/pFlight/MainTrain.cpp",
+  "file": "/home/omer/BIU/pFlight/MainTrain.cpp"
 },
 {
   "directory": "/home/omer/BIU/pFlight/build",
@@ -18,5 +18,10 @@
   "directory": "/home/omer/BIU/pFlight/build",
   "command": "/bin/g++-9    -g   -o CMakeFiles/ex2.dir/SimpleAnomalyDetector.cpp.o -c /home/omer/BIU/pFlight/SimpleAnomalyDetector.cpp",
   "file": "/home/omer/BIU/pFlight/SimpleAnomalyDetector.cpp"
+},
+{
+  "directory": "/home/omer/BIU/pFlight/build",
+  "command": "/bin/g++-9    -g   -o CMakeFiles/ex2.dir/HybridAnomalyDetector.cpp.o -c /home/omer/BIU/pFlight/HybridAnomalyDetector.cpp",
+  "file": "/home/omer/BIU/pFlight/HybridAnomalyDetector.cpp"
 }
 ]
