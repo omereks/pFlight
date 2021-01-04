@@ -44,7 +44,7 @@ Circle trivalCircle3(const Point& p1, const Point&  p2, const Point&  p3);
 
 //check if point is neccesary for making a circle
 bool ifPointIsInCircle(const Circle& c, const vector<Point>& pointsR);
-
+bool pointInCircle(Point p, Circle c);
 //recursiv Wexler Algo
 Circle minidisc(vector<Point>& p, vector<Point> r, int n);
 

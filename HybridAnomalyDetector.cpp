@@ -18,10 +18,11 @@ bool HybridAnomalyDetector::checkIfAnomaly(vector<Point> vecPointOfDetect, int i
 	}
 	if (this->cf[i].corrlation >= 0.5)
 	{
-		this->cf[i].circleCF = minidisc(vecPointOfDetect, { }, vecPointOfDetect.size());
-		this->cf[i].circleCF.setRadius(this->cf[i].circleCF.getRadius()* 1.1 );
-
-		if (!ifPointIsInCircle(this->cf[i].circleCF, vecPointOfDetect))
+		//this->cf[i].circleCF = minidisc(vecPointOfDetect, { }, vecPointOfDetect.size());
+		//this->cf[i].circleCF.setRadius(this->cf[i].circleCF.getRadius()* 1.1 );
+		vector<Point> vecP;
+		vecP.push_back(vecPointOfDetect[j]);
+		if (!pointInCircle(vecPointOfDetect[j] ,this->cf[i].circleCF))
 		{
 			return true;
 		}

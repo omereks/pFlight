@@ -109,7 +109,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 			{
 				if (CorMax<corrlation)
 				{
-					flagFoundCorCircle = true;
+					flagFoundCor = true;
 					iCor = i;
 					jCor = j;
 					feature1 = ts2.features[i];
@@ -124,7 +124,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 						pointsVec.push_back(pCor);
 					}
 					circ = minidisc(pointsVec, { }, pointsVec.size());
-					circ.setRadius(this->cf[i].circleCF.getRadius()* 1.1 );
+					circ.setRadius(circ.getRadius()* 1.1 );
 					
 					lin_reg = linear_reg(pointsVec);
 
@@ -143,15 +143,11 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 
 		}
 		if(flagFoundCor){
-			correlatedFeatures corToAdd(feature1, feature2, CorMax, lin_reg, maxDev, pointsVec, numOfC);
-			this->cf.push_back(corToAdd);
-			flagFoundCor = false;
-		}
-		if(flagFoundCorCircle){
 			correlatedFeatures corToAdd(feature1, feature2, CorMax, lin_reg, maxDev, pointsVec, numOfC, circ);
 			this->cf.push_back(corToAdd);
 			flagFoundCor = false;
 		}
+		
 	}
 	
 
