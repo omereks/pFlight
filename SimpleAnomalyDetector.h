@@ -14,18 +14,14 @@
 struct correlatedFeatures{
 	string feature1,feature2;  // names of the correlated features
 	float corrlation;
-	Circle circleCF;
 	Line lin_reg;
 	float threshold;
 	int sizeOfPoints;
 	vector<Point> vecPoints;
+	Circle circleCF;
 	
 	int getSizeOfPoints(){
 		return this->sizeOfPoints;
-	}
-
-	void setCircleCF(Circle c){
-		this->circleCF = c;
 	}
 
 	correlatedFeatures(string feature1, string feature2, float corrlation, Line lin_reg, float threshold,vector<Point> vecPoints, int sizeOfPoints):
@@ -43,16 +39,13 @@ public:
 
 	virtual void learnNormal(const TimeSeries& ts);
 	virtual vector<AnomalyReport> detect(const TimeSeries& ts);
-	
-	virtual bool checkIfAnomaly(vector<Point> vecPointOfDetect, int i, int j);
 
-	void setCorrelationThreshold(float threshold){
-		this->CorrelationThreshold=threshold;
-	}
+	virtual bool checkIfAnomaly(vector<Point> vecPointOfDetect, int i, int j);
 
 	vector<correlatedFeatures> getNormalModel(){
 		return cf;
 	}
+
 };
 
 

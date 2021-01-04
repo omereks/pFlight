@@ -6,6 +6,7 @@
 /home/omer/BIU/pFlight/build/CMakeFiles/NightlyTest.dir
 /home/omer/BIU/pFlight/build/CMakeFiles/ContinuousConfigure.dir
 /home/omer/BIU/pFlight/build/CMakeFiles/ContinuousBuild.dir
+/home/omer/BIU/pFlight/build/CMakeFiles/NightlyConfigure.dir
 /home/omer/BIU/pFlight/build/CMakeFiles/NightlyMemoryCheck.dir
 /home/omer/BIU/pFlight/build/CMakeFiles/ExperimentalTest.dir
 /home/omer/BIU/pFlight/build/CMakeFiles/ContinuousUpdate.dir
@@ -21,7 +22,6 @@
 /home/omer/BIU/pFlight/build/CMakeFiles/NightlyStart.dir
 /home/omer/BIU/pFlight/build/CMakeFiles/ExperimentalCoverage.dir
 /home/omer/BIU/pFlight/build/CMakeFiles/NightlyCoverage.dir
-/home/omer/BIU/pFlight/build/CMakeFiles/ExperimentalStart.dir
 /home/omer/BIU/pFlight/build/CMakeFiles/package.dir
 /home/omer/BIU/pFlight/build/CMakeFiles/NightlyBuild.dir
 /home/omer/BIU/pFlight/build/CMakeFiles/ExperimentalBuild.dir
@@ -30,5 +30,5 @@
 /home/omer/BIU/pFlight/build/CMakeFiles/ContinuousMemCheck.dir
 /home/omer/BIU/pFlight/build/CMakeFiles/ContinuousTest.dir
 /home/omer/BIU/pFlight/build/CMakeFiles/ContinuousSubmit.dir
-/home/omer/BIU/pFlight/build/CMakeFiles/NightlyConfigure.dir
-/home/omer/BIU/pFlight/build/CMakeFiles/ex2.dir
+/home/omer/BIU/pFlight/build/CMakeFiles/ExperimentalStart.dir
+/home/omer/BIU/pFlight/build/CMakeFiles/ex4.dir

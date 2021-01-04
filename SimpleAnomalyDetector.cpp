@@ -2,6 +2,7 @@
 #include "SimpleAnomalyDetector.h"
 #include "timeseries.h"
 #include "anomaly_detection_util.h"
+#include <iostream>
 
 
 SimpleAnomalyDetector::SimpleAnomalyDetector() {
@@ -168,6 +169,5 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
 		
 	}
 	return vecAnomalyRet;
-	// TODO Auto-generated destructor stub
 }
 

@@ -1,27 +1,32 @@
 [
 {
   "directory": "/home/omer/BIU/pFlight/build",
-  "command": "/bin/g++-9    -g   -o CMakeFiles/ex2.dir/MainTrain.cpp.o -c /home/omer/BIU/pFlight/MainTrain.cpp",
+  "command": "/bin/g++-9   -g -o CMakeFiles/ex4.dir/MainTrain.cpp.o -c /home/omer/BIU/pFlight/MainTrain.cpp",
   "file": "/home/omer/BIU/pFlight/MainTrain.cpp"
 },
 {
   "directory": "/home/omer/BIU/pFlight/build",
-  "command": "/bin/g++-9    -g   -o CMakeFiles/ex2.dir/timeseries.cpp.o -c /home/omer/BIU/pFlight/timeseries.cpp",
+  "command": "/bin/g++-9   -g -o CMakeFiles/ex4.dir/timeseries.cpp.o -c /home/omer/BIU/pFlight/timeseries.cpp",
   "file": "/home/omer/BIU/pFlight/timeseries.cpp"
 },
 {
   "directory": "/home/omer/BIU/pFlight/build",
-  "command": "/bin/g++-9    -g   -o CMakeFiles/ex2.dir/anomaly_detection_util.cpp.o -c /home/omer/BIU/pFlight/anomaly_detection_util.cpp",
+  "command": "/bin/g++-9   -g -o CMakeFiles/ex4.dir/anomaly_detection_util.cpp.o -c /home/omer/BIU/pFlight/anomaly_detection_util.cpp",
   "file": "/home/omer/BIU/pFlight/anomaly_detection_util.cpp"
 },
 {
   "directory": "/home/omer/BIU/pFlight/build",
-  "command": "/bin/g++-9    -g   -o CMakeFiles/ex2.dir/SimpleAnomalyDetector.cpp.o -c /home/omer/BIU/pFlight/SimpleAnomalyDetector.cpp",
+  "command": "/bin/g++-9   -g -o CMakeFiles/ex4.dir/SimpleAnomalyDetector.cpp.o -c /home/omer/BIU/pFlight/SimpleAnomalyDetector.cpp",
   "file": "/home/omer/BIU/pFlight/SimpleAnomalyDetector.cpp"
 },
 {
   "directory": "/home/omer/BIU/pFlight/build",
-  "command": "/bin/g++-9    -g   -o CMakeFiles/ex2.dir/HybridAnomalyDetector.cpp.o -c /home/omer/BIU/pFlight/HybridAnomalyDetector.cpp",
+  "command": "/bin/g++-9   -g -o CMakeFiles/ex4.dir/HybridAnomalyDetector.cpp.o -c /home/omer/BIU/pFlight/HybridAnomalyDetector.cpp",
   "file": "/home/omer/BIU/pFlight/HybridAnomalyDetector.cpp"
+},
+{
+  "directory": "/home/omer/BIU/pFlight/build",
+  "command": "/bin/g++-9   -g -o CMakeFiles/ex4.dir/minCircle.cpp.o -c /home/omer/BIU/pFlight/minCircle.cpp",
+  "file": "/home/omer/BIU/pFlight/minCircle.cpp"
 }
 ]
