@@ -28,5 +28,10 @@
   "directory": "/home/omer/BIU/pFlight/build",
   "command": "/bin/g++-9   -g -o CMakeFiles/ex4.dir/minCircle.cpp.o -c /home/omer/BIU/pFlight/minCircle.cpp",
   "file": "/home/omer/BIU/pFlight/minCircle.cpp"
+},
+{
+  "directory": "/home/omer/BIU/pFlight/build",
+  "command": "/bin/g++-9   -g -o CMakeFiles/ex4.dir/CLI.cpp.o -c /home/omer/BIU/pFlight/CLI.cpp",
+  "file": "/home/omer/BIU/pFlight/CLI.cpp"
 }
 ]

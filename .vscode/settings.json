@@ -12,7 +12,10 @@
         "initializer_list": "cpp",
         "iostream": "cpp",
         "iosfwd": "cpp",
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "istream": "cpp",
+        "system_error": "cpp",
+        "exception": "cpp"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/."
 }
