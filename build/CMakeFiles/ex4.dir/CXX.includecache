@@ -16,6 +16,10 @@ timeseries.h
 math.h
 /home/omer/BIU/pFlight/math.h
 
+/home/omer/BIU/pFlight/CLI.cpp
+CLI.h
+/home/omer/BIU/pFlight/CLI.h
+
 /home/omer/BIU/pFlight/CLI.h
 string.h
 -

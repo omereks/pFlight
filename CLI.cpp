@@ -1,22 +1,23 @@
 #include "CLI.h"
 vector<Command*> buildAllCommand(vector<Command*> vecRet, DefaultIO* dio){
-    vecRet.push_back(new CommandOneUploadFile(dio));
-    vecRet.push_back(new CommandTwoAlgorithmSettings(dio));
-    vecRet.push_back(new CommandThreeDetectAnomalies(dio));
-    vecRet.push_back(new CommandFourDisplayResults(dio));
-    vecRet.push_back(new CommandFiveUploadAnomalies(dio));
-    vecRet.push_back(new CommandSixExit(dio));
+    //vecRet.push_back(new CommandOneUploadFile(dio));
+    //vecRet.push_back(new CommandTwoAlgorithmSettings(dio));
+    //vecRet.push_back(new CommandThreeDetectAnomalies(dio));
+    //vecRet.push_back(new CommandFourDisplayResults(dio));
+    //vecRet.push_back(new CommandFiveUploadAnomalies(dio));
+    //vecRet.push_back(new CommandSixExit(dio));
     return vecRet;
 }
 CLI::CLI(DefaultIO* dio) {
     this->dio = dio;
+    commandsData * data;
     //buildAllCommand
-    this->vecCommands.push_back(new CommandOneUploadFile(dio));
-    this->vecCommands.push_back(new CommandTwoAlgorithmSettings(dio));
-    this->vecCommands.push_back(new CommandThreeDetectAnomalies(dio));
-    this->vecCommands.push_back(new CommandFourDisplayResults(dio));
-    this->vecCommands.push_back(new CommandFiveUploadAnomalies(dio));
-    this->vecCommands.push_back(new CommandSixExit(dio));
+    this->vecCommands.push_back(new CommandOneUploadFile(dio,data));
+    this->vecCommands.push_back(new CommandTwoAlgorithmSettings(dio,data));
+    this->vecCommands.push_back(new CommandThreeDetectAnomalies(dio,data));
+    this->vecCommands.push_back(new CommandFourDisplayResults(dio,data));
+    this->vecCommands.push_back(new CommandFiveUploadAnomalies(dio,data));
+    this->vecCommands.push_back(new CommandSixExit(dio,data));
 }
 
 void CLI::start(){
@@ -32,15 +33,13 @@ void CLI::start(){
             this->dio->write(commandISteing);
         }
         float x;
-        //string inputNumber = this->dio->read();
-        //chooseCommand = stoi(inputNumber);
+        string inputNumber = this->dio->read();
+        chooseCommand = stoi(inputNumber);
         if (chooseCommand == 6)
         {
             break;
         }
-        //this->vecCommands[chooseCommand-1]->execute();
-        break;
-        
+        this->vecCommands[chooseCommand-1]->execute();
     }
     
     

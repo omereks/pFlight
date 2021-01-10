@@ -37,6 +37,20 @@ public:
     virtual void read(float* f){
         in>>*f;
     }
+	virtual void uploadFile(string fileName) {
+		ofstream filestream(fileName);
+		string readLine = "";
+		while (readLine != "done")
+		{
+			readLine = read();
+			if (readLine != "done")
+			{
+				filestream<<readLine<<endl;
+			}
+		}
+		write("Upload complete.\r\n");
+		filestream.close();
+	}
 
     void close(){
         if(in.is_open())
