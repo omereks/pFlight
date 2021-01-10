@@ -65,7 +65,7 @@ public:
 class CommandOneUploadFile: public Command{
 	public:
 		CommandOneUploadFile(DefaultIO* dio):Command(dio){	
-			this->description = "1. upload a time series csv file\n";
+			this->description = "1.upload a time series csv file\r\n";
 		}
 		void execute(){
 			this->dio->write(this->description);
@@ -76,7 +76,7 @@ class CommandOneUploadFile: public Command{
 class CommandTwoAlgorithmSettings: public Command{
 	public:
 		CommandTwoAlgorithmSettings(DefaultIO* dio):Command(dio){	
-			this->description = "2. algorithm settings\n";
+			this->description = "2.algorithm settings\r\n";
 		}
 		void execute(){
 			this->dio->write(this->description);
@@ -87,7 +87,7 @@ class CommandTwoAlgorithmSettings: public Command{
 class CommandThreeDetectAnomalies: public Command{
 	public:
 		CommandThreeDetectAnomalies(DefaultIO* dio):Command(dio){	
-			this->description = "3. detect anomalies\n";
+			this->description = "3.detect anomalies\r\n";
 		}
 		void execute(){
 			this->dio->write(this->description);
@@ -98,7 +98,7 @@ class CommandThreeDetectAnomalies: public Command{
 class CommandFourDisplayResults: public Command{
 	public:
 		CommandFourDisplayResults(DefaultIO* dio):Command(dio){	
-			this->description = "4. display results\n";
+			this->description = "4.display results\r\n";
 		}
 		void execute(){
 			this->dio->write(this->description);
@@ -109,7 +109,7 @@ class CommandFourDisplayResults: public Command{
 class CommandFiveUploadAnomalies: public Command{
 	public:
 		CommandFiveUploadAnomalies(DefaultIO* dio):Command(dio){	
-			this->description = "5. upload anomalies and analyze results\n";
+			this->description = "5.upload anomalies and analyze results\r\n";
 		}
 		void execute(){
 			this->dio->write(this->description);
@@ -120,7 +120,7 @@ class CommandFiveUploadAnomalies: public Command{
 class CommandSixExit: public Command{
 	public:
 		CommandSixExit(DefaultIO* dio):Command(dio){	
-			this->description = "6. exit\n";
+			this->description = "6.exit\r\n";
 		}
 		void execute(){
 			this->dio->write(this->description);

@@ -24,21 +24,22 @@ void CLI::start(){
     string commandISteing;
     while (chooseCommand!=6)
     {
-        this->dio->write("Welcome to the Anomaly Detection Server.\n");
-        this->dio->write("Please choose an option:\n");
+        this->dio->write("Welcome to the Anomaly Detection Server.\r\n");
+        this->dio->write("Please choose an option:\r\n");
         for (int i = 0; i < this->vecCommands.size(); i++)
         {
             commandISteing = this->vecCommands[i]->getDescription();
             this->dio->write(commandISteing);
         }
         float x;
-        string inputNumber = this->dio->read();
-        chooseCommand = stoi(inputNumber);
+        //string inputNumber = this->dio->read();
+        //chooseCommand = stoi(inputNumber);
         if (chooseCommand == 6)
         {
             break;
         }
-        this->vecCommands[chooseCommand-1]->execute();
+        //this->vecCommands[chooseCommand-1]->execute();
+        break;
         
     }
     
