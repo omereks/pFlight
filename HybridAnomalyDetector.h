@@ -13,7 +13,6 @@ public:
 	
 	virtual bool checkIfAnomaly(vector<Point> vecPointOfDetect, int i, int j) override;
 
-	
 
 };
 

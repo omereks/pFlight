@@ -47,6 +47,13 @@ public:
 
 	virtual bool checkIfAnomaly(vector<Point> vecPointOfDetect, int i, int j);
 
+	float getCorrelationThreshold(){
+		return CorrelationThreshold;
+	}
+	void setCorrelationThreshold(float newCor){
+		this->CorrelationThreshold = newCor;
+	}
+
 	vector<correlatedFeatures> getNormalModel(){
 		return cf;
 	}

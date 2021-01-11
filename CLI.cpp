@@ -10,7 +10,8 @@ vector<Command*> buildAllCommand(vector<Command*> vecRet, DefaultIO* dio){
 }
 CLI::CLI(DefaultIO* dio) {
     this->dio = dio;
-    commandsData * data;
+    commandsData * data = new commandsData();
+    data->setAnomalyDetector(this->hybridDetector);
     //buildAllCommand
     this->vecCommands.push_back(new CommandOneUploadFile(dio,data));
     this->vecCommands.push_back(new CommandTwoAlgorithmSettings(dio,data));

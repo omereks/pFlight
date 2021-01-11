@@ -11,7 +11,7 @@ using namespace std;
 class CLI {
 	DefaultIO* dio;
 	vector<Command*> vecCommands;
-	HybridAnomalyDetector hybridDetector;
+	HybridAnomalyDetector * hybridDetector = new HybridAnomalyDetector();
 	// you can add data members
 public:
 	CLI(DefaultIO* dio);
