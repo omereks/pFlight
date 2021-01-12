@@ -17,7 +17,8 @@ protected:
 	HybridAnomalyDetector * anomalyDetector;
 	TimeSeries* tsTrainData;
 	TimeSeries* tsTestData;
-	vector<AnomalyReport> * vecAnomalyReport;
+	vector<AnomalyReport> vecAnomalyReport;
+	vector<vector<int>> vecAnomalyUpload;
 public:
 	commandsData(){
 		this->anomalyDetector = new HybridAnomalyDetector();
@@ -47,10 +48,92 @@ public:
 		this->tsTestData = new TimeSeries(ts);
 	}
 	void setVecAnomalyReport(vector<AnomalyReport> vec){
-		this->vecAnomalyReport = &vec;
+		for (int i = 0; i < vec.size(); i++)
+		{
+			this->vecAnomalyReport.push_back(vec[i]);
+		}
 	}
-	vector<AnomalyReport> * getVecAnomalyReport(){
+	vector<AnomalyReport> getVecAnomalyReport(){
 		return this->vecAnomalyReport;
+	}
+	vector<vector<int>> getVecAnomalyUpload(){
+		return this->vecAnomalyUpload;
+	}
+	void addVecAnomalyUpload(vector<string> vec){
+		vecAnomalyUpload.clear();
+		for (int i = 0; i < vec.size(); i++)
+		{
+			string str(vec[i]);
+    		string buf;                 // Have a buffer string
+    		stringstream ss(str);       // Insert the string into a stream
+    		vector<int> tokens; // Create vector to hold our words
+			while (getline(ss, buf, ',')){
+				int bufInt = stoi(buf);
+				tokens.push_back(bufInt);
+			}
+			vecAnomalyUpload.push_back(tokens);
+		}
+	}
+	vector<vector<int>> buildWindow(){
+		vector<vector<int>> vecRet;
+		for (int i = 0; i < vecAnomalyReport.size(); i++)
+		{
+			vector<int> insideVec;
+			insideVec.push_back(vecAnomalyReport[i].timeStep);
+			for (int j = i; j < vecAnomalyReport.size(); j++)
+			{
+				if (vecAnomalyReport[j].timeStep +1 != vecAnomalyReport[j+1].timeStep)
+				{
+					insideVec.push_back(vecAnomalyReport[j].timeStep);
+					i = j;
+					j = vecAnomalyReport.size();
+				}
+			}
+			vecRet.push_back(insideVec);
+		}
+		delDuplicatedAnomaly(vecRet);
+		return vecRet;
+	}
+	void delDuplicatedAnomaly(vector<vector<int>> vec){
+		for (int i = 0; i < vec.size(); i++)
+		{
+			for (int j = 0; j < vec.size(); j++)
+			{
+				if (i!=j)
+				{
+					
+					// j is inside i
+					if((vec[i][0] <= vec[j][0]) && (vec[i][1] >= vec[j][1]))
+					{
+						vec.erase(vec.begin()+j);
+						i = 0;
+						j = 0;
+						break;
+					}
+
+					if((vec[i][0] >= vec[j][0]) && (vec[i][1] >= vec[j][1]) && (vec[i][0] <= vec[j][1]))
+					{
+						vec[i][0] = vec[j][0];
+						vec.erase(vec.begin()+j);
+						i = 0;
+						j = 0;
+						break;
+					}
+
+					if((vec[i][1] <= vec[j][1]) && (vec[i][0] <= vec[j][0]) && (vec[i][1] >= vec[j][0]))
+					{
+						vec[i][1] = vec[j][1];
+						vec.erase(vec.begin()+j);
+						i = 0;
+						j = 0;
+						break;
+					}
+				}
+				
+			}
+			
+		}
+		
 	}
 };
 
@@ -68,9 +151,6 @@ public:
 };
 
 class standartIO:public DefaultIO {
-protected:
-	ifstream in;
-    ofstream out;
 public:
 	standartIO():DefaultIO(){};
 	virtual string read(){
@@ -79,13 +159,13 @@ public:
 		return line;
 	}
 	virtual void write(string text){
-		out<<text;
+		cout<<text;
 	}
 	virtual void write(float f){
-		out<<f;
+		cout<<f;
 	}
 	virtual void read(float* f){
-		in>>*f;
+		cin>>*f;
 	}
 	virtual void uploadFile(string fileName) {
 		ofstream filestream(fileName);
@@ -172,7 +252,8 @@ class CommandThreeDetectAnomalies: public Command{
 		}
 		void execute(){
 			this->getData()->getAnomalyDetector()->learnNormal(*this->getData()->getTsTrainData());
-			this->getData()->setVecAnomalyReport(this->getData()->getAnomalyDetector()->detect(*this->getData()->getTsTestData()));
+			vector<AnomalyReport> vecAnomaly = this->getData()->getAnomalyDetector()->detect(*this->getData()->getTsTestData());
+			this->getData()->setVecAnomalyReport(vecAnomaly);
 			this->dio->write("anomaly detection complete.\r\n");
 		}
 };
@@ -184,7 +265,15 @@ class CommandFourDisplayResults: public Command{
 			this->description = "4.display results\r\n";
 		}
 		void execute(){
-			this->dio->write(this->description);
+			for (int i = 0; i < this->data->getVecAnomalyReport().size(); i++)
+			{
+				this->dio->write(this->data->getVecAnomalyReport()[i].timeStep);
+				this->dio->write("\t");
+				this->dio->write(this->data->getVecAnomalyReport()[i].description);
+				this->dio->write("\r\n");
+			}
+			this->dio->write("Done.\r\n");
+
 		}
 };
 
@@ -195,7 +284,99 @@ class CommandFiveUploadAnomalies: public Command{
 			this->description = "5.upload anomalies and analyze results\r\n";
 		}
 		void execute(){
-			this->dio->write(this->description);
+			this->dio->write("Please upload your local anomalies file.\r\n");
+			//ofstream filestream(this->dio->read());
+			string readLine = "";
+			vector<string> anomalyUpload;
+			while (readLine != "done")
+			{
+				readLine = this->dio->read();
+				if (readLine != "done")
+				{
+					anomalyUpload.push_back(readLine);
+				}
+			}
+			this->data->addVecAnomalyUpload(anomalyUpload);
+			this->dio->write("Upload complete.\r\n");
+
+			//P
+			float P = this->data->getVecAnomalyUpload().size();
+			int sum = 0;
+			
+			//N
+			for (int i = 0; i < this->data->getVecAnomalyUpload().size(); i++)
+			{
+				sum += this->data->getVecAnomalyUpload()[i][1] - this->data->getVecAnomalyUpload()[i][0];
+			}
+			float N = this->data->getTsTestData()->vecCSV.size() - sum + 1;
+
+			//TP
+			float TP = 0;
+			for (int i = 0; i < this->data->getVecAnomalyUpload().size(); i++)
+			{
+				for (int j = 0; j < this->data->getVecAnomalyReport().size(); j++)
+				{
+					if (this->data->getVecAnomalyReport()[j].timeStep >=  this->data->getVecAnomalyUpload()[i][0] && this->data->getVecAnomalyReport()[j].timeStep <= this->data->getVecAnomalyUpload()[i][1])
+					{
+						TP++;
+						j++;
+						if (i + 1  < this->data->getVecAnomalyUpload().size())
+						{
+							i++;
+						}
+						else
+						{
+							break;
+						}
+					}	
+				}
+			}
+
+			//FP
+			float FP = 0;
+			vector<vector<int>> vecWindow = this->data->buildWindow();
+			for (int i = 0; i < vecWindow.size(); i++)
+			{
+				bool flag = false;
+				for (int j = 0; j < this->data->getVecAnomalyUpload().size(); j++)
+				{
+					if (((vecWindow[i][0] >= this->data->getVecAnomalyUpload()[j][0]) && (vecWindow[i][0] <= this->data->getVecAnomalyUpload()[j][1])) || ((vecWindow[i][1] >= this->data->getVecAnomalyUpload()[j][0]) && (vecWindow[i][1] <= this->data->getVecAnomalyUpload()[j][1])))
+					{
+						flag = true;
+					}
+					if (((this->data->getVecAnomalyUpload()[j][0] >= vecWindow[i][0]) && (this->data->getVecAnomalyUpload()[j][0] <= vecWindow[i][1])) || ((this->data->getVecAnomalyUpload()[j][1] >= vecWindow[i][0]) && (this->data->getVecAnomalyUpload()[j][1] <= vecWindow[i][1])))
+					{
+						flag = true;
+					}
+					
+				}
+				if (!flag)
+				{
+					FP++;
+				}
+			}
+			
+
+
+			float tpRate = TP / P ;
+			float fpRate = FP / N ;
+
+			if (tpRate != 1)
+			{
+				tpRate = (float)(((int)(tpRate*1000)) % 1000)/1000;
+			}
+			if (fpRate != 1)
+			{
+				fpRate = (float)(((int)(fpRate*1000)) % 1000)/1000;
+			}
+			this->dio->write("True Positive Rate: ");
+			this->dio->write(tpRate);
+			this->dio->write("\r\n");
+
+			this->dio->write("False Positive Rate: ");
+			this->dio->write(fpRate);
+			this->dio->write("\r\n");
+
 		}
 };
 

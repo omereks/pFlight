@@ -36,7 +36,7 @@ void CLI::start(){
         float x;
         string inputNumber = this->dio->read();
         chooseCommand = stoi(inputNumber);
-        if (chooseCommand == 6)
+        if (chooseCommand >= 6 || chooseCommand<=0)
         {
             break;
         }
