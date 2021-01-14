@@ -26,8 +26,8 @@ void CLI::start(){
     string commandISteing;
     while (chooseCommand!=6)
     {
-        this->dio->write("Welcome to the Anomaly Detection Server.\r\n");
-        this->dio->write("Please choose an option:\r\n");
+        this->dio->write("Welcome to the Anomaly Detection Server.\n");
+        this->dio->write("Please choose an option:\n");
         for (int i = 0; i < this->vecCommands.size(); i++)
         {
             commandISteing = this->vecCommands[i]->getDescription();
@@ -35,12 +35,20 @@ void CLI::start(){
         }
         float x;
         string inputNumber = this->dio->read();
-        chooseCommand = stoi(inputNumber);
-        if (chooseCommand >= 6 || chooseCommand<=0)
-        {
-            break;
+        
+        try{
+           chooseCommand = stoi(inputNumber);
+            if (chooseCommand >= 6 || chooseCommand<=0)
+            {
+                break;
+            }
+            this->vecCommands[chooseCommand-1]->execute();
         }
-        this->vecCommands[chooseCommand-1]->execute();
+        catch(const invalid_argument&){
+
+        }
+        
+        
     }
     
     

@@ -63,13 +63,19 @@ public:
 		vecAnomalyUpload.clear();
 		for (int i = 0; i < vec.size(); i++)
 		{
+			int bufInt;
 			string str(vec[i]);
     		string buf;                 // Have a buffer string
     		stringstream ss(str);       // Insert the string into a stream
     		vector<int> tokens; // Create vector to hold our words
 			while (getline(ss, buf, ',')){
-				int bufInt = stoi(buf);
-				tokens.push_back(bufInt);
+				try{
+					bufInt = stoi(buf);
+					tokens.push_back(bufInt);
+				}
+				catch(const invalid_argument&){
+
+				}
 			}
 			vecAnomalyUpload.push_back(tokens);
 		}
@@ -159,10 +165,10 @@ public:
 		return line;
 	}
 	virtual void write(string text){
-		cout<<text;
+		cout<<text<<endl;
 	}
 	virtual void write(float f){
-		cout<<f;
+		cout<<f<<endl;
 	}
 	virtual void read(float* f){
 		cin>>*f;
@@ -175,7 +181,9 @@ public:
 			filestream<<readLine<<endl;
 		}
 		write("Upload complete.\n");
-		filestream.close();
+		if (filestream.is_open()){
+			filestream.close();
+		}
 	}
 };
 
@@ -198,6 +206,21 @@ public:
 	virtual ~Command(){}
 	string getDescription(){return this->description;}
 	commandsData * getData(){return this->data;}
+	DefaultIO * getDio(){return this->dio;}
+	virtual void uploadFile(string fileName) {
+		ofstream filestream(fileName);
+		string readLine = "";
+		while (readLine != "done")
+		{
+			readLine = this->getDio()->read();
+			if (readLine != "done")
+			{
+				filestream<<readLine<<endl;
+			}
+		}
+		this->getDio()->write("Upload complete.\n");
+		filestream.close();
+	}
 };
 
 
@@ -205,17 +228,18 @@ public:
 class CommandOneUploadFile: public Command{
 	public:
 		CommandOneUploadFile(DefaultIO* dio, commandsData * data):Command(dio, data){	
-			this->description = "1.upload a time series csv file\r\n";
+			this->description = "1.upload a time series csv file\n";
 		}
 		void execute(){
-			this->dio->write("Please upload your local train CSV file.\r\n");
+			this->getDio()->write("Please upload your local train CSV file.\n");
 			//string uploadFilePath = this->dio->read();
-			this->dio->uploadFile("traindata.csv");	
+			//this->dio->write(uploadFilePath);
+			this->uploadFile("traindata.csv");	
 			this->getData()->setTsTrainData(TimeSeries("traindata.csv"));
 
-			this->dio->write("Please upload your local test CSV file.\r\n");
+			this->getDio()->write("Please upload your local test CSV file.\n");
 			//string uploadFilePath = this->dio->read();
-			this->dio->uploadFile("testdata.csv");
+			this->uploadFile("testdata.csv");
 			this->getData()->setTsTestData(TimeSeries("testdata.csv"));
 		}
 };
@@ -224,22 +248,22 @@ class CommandOneUploadFile: public Command{
 class CommandTwoAlgorithmSettings: public Command{
 	public:
 		CommandTwoAlgorithmSettings(DefaultIO* dio, commandsData * data):Command(dio, data){		
-			this->description = "2.algorithm settings\r\n";
+			this->description = "2.algorithm settings\n";
 		}
 		void execute(){
-			this->dio->write("The current correlation threshold is ");
-			this->dio->write(this->getData()->getAnomalyDetector()->getCorrelationThreshold());
-			this->dio->write("\r\n");
-			this->dio->write("Type a new threshold\r\n");
-			string newCorS = this->dio->read();
+			this->getDio()->write("The current correlation threshold is ");
+			this->getDio()->write(this->getData()->getAnomalyDetector()->getCorrelationThreshold());
+			this->getDio()->write("\n");
+			this->getDio()->write("Type a new threshold\n");
+			string newCorS = this->getDio()->read();
 			float newCor =  stof(newCorS);
 			if (newCor >= 0 && newCor <= 1)
 			{
 				this->data->getAnomalyDetector()->setCorrelationThreshold(newCor);
 				return;
 			}
-			this->dio->write("please choose a value between 0 and 1.\r\n");
-			this->dio->read();
+			this->getDio()->write("please choose a value between 0 and 1.\n");
+			this->getDio()->read();
 			this->execute();
 		}
 };
@@ -248,13 +272,13 @@ class CommandTwoAlgorithmSettings: public Command{
 class CommandThreeDetectAnomalies: public Command{
 	public:
 		CommandThreeDetectAnomalies(DefaultIO* dio, commandsData * data):Command(dio, data){	
-			this->description = "3.detect anomalies\r\n";
+			this->description = "3.detect anomalies\n";
 		}
 		void execute(){
 			this->getData()->getAnomalyDetector()->learnNormal(*this->getData()->getTsTrainData());
 			vector<AnomalyReport> vecAnomaly = this->getData()->getAnomalyDetector()->detect(*this->getData()->getTsTestData());
 			this->getData()->setVecAnomalyReport(vecAnomaly);
-			this->dio->write("anomaly detection complete.\r\n");
+			this->getDio()->write("anomaly detection complete.\n");
 		}
 };
 
@@ -262,17 +286,17 @@ class CommandThreeDetectAnomalies: public Command{
 class CommandFourDisplayResults: public Command{
 	public:
 		CommandFourDisplayResults(DefaultIO* dio, commandsData * data):Command(dio, data){	
-			this->description = "4.display results\r\n";
+			this->description = "4.display results\n";
 		}
 		void execute(){
 			for (int i = 0; i < this->data->getVecAnomalyReport().size(); i++)
 			{
-				this->dio->write(this->data->getVecAnomalyReport()[i].timeStep);
-				this->dio->write("\t");
-				this->dio->write(this->data->getVecAnomalyReport()[i].description);
-				this->dio->write("\r\n");
+				this->getDio()->write(this->data->getVecAnomalyReport()[i].timeStep);
+				this->getDio()->write("\t");
+				this->getDio()->write(this->data->getVecAnomalyReport()[i].description);
+				this->getDio()->write("\n");
 			}
-			this->dio->write("Done.\r\n");
+			this->getDio()->write("Done.\n");
 
 		}
 };
@@ -281,23 +305,23 @@ class CommandFourDisplayResults: public Command{
 class CommandFiveUploadAnomalies: public Command{
 	public:
 		CommandFiveUploadAnomalies(DefaultIO* dio, commandsData * data):Command(dio, data){	
-			this->description = "5.upload anomalies and analyze results\r\n";
+			this->description = "5.upload anomalies and analyze results\n";
 		}
 		void execute(){
-			this->dio->write("Please upload your local anomalies file.\r\n");
+			this->getDio()->write("Please upload your local anomalies file.\n");
 			//ofstream filestream(this->dio->read());
 			string readLine = "";
 			vector<string> anomalyUpload;
 			while (readLine != "done")
 			{
-				readLine = this->dio->read();
+				readLine = this->getDio()->read();
 				if (readLine != "done")
 				{
 					anomalyUpload.push_back(readLine);
 				}
 			}
 			this->data->addVecAnomalyUpload(anomalyUpload);
-			this->dio->write("Upload complete.\r\n");
+			this->getDio()->write("Upload complete.\n");
 
 			//P
 			float P = this->data->getVecAnomalyUpload().size();
@@ -369,13 +393,13 @@ class CommandFiveUploadAnomalies: public Command{
 			{
 				fpRate = (float)(((int)(fpRate*1000)) % 1000)/1000;
 			}
-			this->dio->write("True Positive Rate: ");
-			this->dio->write(tpRate);
-			this->dio->write("\r\n");
+			this->getDio()->write("True Positive Rate: ");
+			this->getDio()->write(tpRate);
+			this->getDio()->write("\n");
 
-			this->dio->write("False Positive Rate: ");
-			this->dio->write(fpRate);
-			this->dio->write("\r\n");
+			this->getDio()->write("False Positive Rate: ");
+			this->getDio()->write(fpRate);
+			this->getDio()->write("\n");
 
 		}
 };
@@ -384,10 +408,10 @@ class CommandFiveUploadAnomalies: public Command{
 class CommandSixExit: public Command{
 	public:
 		CommandSixExit(DefaultIO* dio, commandsData * data):Command(dio, data){	
-			this->description = "6.exit\r\n";
+			this->description = "6.exit\n";
 		}
 		void execute(){
-			this->dio->write(this->description);
+			
 		}
 };
 

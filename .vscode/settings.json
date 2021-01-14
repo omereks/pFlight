@@ -15,7 +15,9 @@
         "type_traits": "cpp",
         "istream": "cpp",
         "system_error": "cpp",
-        "exception": "cpp"
+        "exception": "cpp",
+        "fstream": "cpp",
+        "ostream": "cpp"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/."
 }
