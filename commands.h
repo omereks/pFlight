@@ -8,6 +8,15 @@
 
 #include <fstream>
 #include <vector>
+#include "sstream"
+#include "math.h"
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <pthread.h>
+#include <thread>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include "HybridAnomalyDetector.h"
 
 using namespace std;
@@ -187,9 +196,32 @@ public:
 	}
 };
 
-//class socketIO:public DefaultIO{
-//public:	
-//};
+class socketIO:public DefaultIO{
+int clientID;
+public:	
+	virtual string read(){
+		string serverInput="";
+		char c=0;
+		::read(clientID,&c,sizeof(char));
+		while(c!='\n'){				
+			serverInput+=c;
+			::read(clientID,&c,sizeof(char));
+		}
+		return serverInput;
+	}
+	virtual void write(string text){
+		::write(clientID, text.c_str(), text.length());
+	}
+	virtual void write(float f){
+		::write(clientID, to_string(f).c_str(), to_string(f).length());
+	}
+	virtual void read(float* f){
+		recv(clientID, f, sizeof(*f), 0);
+	}
+	void setClientID(int sID){
+		clientID=sID;
+	}
+};
 
 // you may add here helper classes
 

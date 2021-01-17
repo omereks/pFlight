@@ -23,6 +23,7 @@ CMakeFiles/ex4.dir/MainTrain.cpp.o: ../AnomalyDetector.h
 CMakeFiles/ex4.dir/MainTrain.cpp.o: ../CLI.h
 CMakeFiles/ex4.dir/MainTrain.cpp.o: ../HybridAnomalyDetector.h
 CMakeFiles/ex4.dir/MainTrain.cpp.o: ../MainTrain.cpp
+CMakeFiles/ex4.dir/MainTrain.cpp.o: ../Server.h
 CMakeFiles/ex4.dir/MainTrain.cpp.o: ../SimpleAnomalyDetector.h
 CMakeFiles/ex4.dir/MainTrain.cpp.o: ../anomaly_detection_util.h
 CMakeFiles/ex4.dir/MainTrain.cpp.o: ../commands.h

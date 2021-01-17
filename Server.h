@@ -7,6 +7,9 @@
 
 #ifndef SERVER_H_
 #define SERVER_H_
+#include "commands.h"
+#include "CLI.h"
+
 
 
 using namespace std;
@@ -25,7 +28,10 @@ class ClientHandler{
 class AnomalyDetectionHandler:public ClientHandler{
 	public:
     virtual void handle(int clientID){
-
+		socketIO s;
+		s.setClientID(clientID);
+		CLI cli(&s);
+		cli.start();
     }
 };
 
