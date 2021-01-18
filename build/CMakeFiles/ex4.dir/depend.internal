@@ -30,6 +30,17 @@ CMakeFiles/ex4.dir/MainTrain.cpp.o
  /home/omer/BIU/pFlight/commands.h
  /home/omer/BIU/pFlight/minCircle.h
  /home/omer/BIU/pFlight/timeseries.h
+CMakeFiles/ex4.dir/Server.cpp.o
+ /home/omer/BIU/pFlight/AnomalyDetector.h
+ /home/omer/BIU/pFlight/CLI.h
+ /home/omer/BIU/pFlight/HybridAnomalyDetector.h
+ /home/omer/BIU/pFlight/Server.cpp
+ /home/omer/BIU/pFlight/Server.h
+ /home/omer/BIU/pFlight/SimpleAnomalyDetector.h
+ /home/omer/BIU/pFlight/anomaly_detection_util.h
+ /home/omer/BIU/pFlight/commands.h
+ /home/omer/BIU/pFlight/minCircle.h
+ /home/omer/BIU/pFlight/timeseries.h
 CMakeFiles/ex4.dir/SimpleAnomalyDetector.cpp.o
  /home/omer/BIU/pFlight/AnomalyDetector.h
  /home/omer/BIU/pFlight/SimpleAnomalyDetector.cpp

@@ -33,5 +33,10 @@
   "directory": "/home/omer/BIU/pFlight/build",
   "command": "/bin/g++-9   -g -o CMakeFiles/ex4.dir/CLI.cpp.o -c /home/omer/BIU/pFlight/CLI.cpp",
   "file": "/home/omer/BIU/pFlight/CLI.cpp"
+},
+{
+  "directory": "/home/omer/BIU/pFlight/build",
+  "command": "/bin/g++-9   -g -o CMakeFiles/ex4.dir/Server.cpp.o -c /home/omer/BIU/pFlight/Server.cpp",
+  "file": "/home/omer/BIU/pFlight/Server.cpp"
 }
 ]

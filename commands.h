@@ -199,24 +199,34 @@ public:
 class socketIO:public DefaultIO{
 int clientID;
 public:	
+	socketIO(int clientID){
+		this->clientID =clientID;
+	}
 	virtual string read(){
-		string serverInput="";
-		char c=0;
-		::read(clientID,&c,sizeof(char));
-		while(c!='\n'){				
-			serverInput+=c;
-			::read(clientID,&c,sizeof(char));
-		}
-		return serverInput;
+		string input = "";
+        char c = 0;
+        ::read(clientID, &c, sizeof(char));
+        while (c != '\n') {
+            input += c;
+            ::read(clientID, &c, sizeof(char));
+        }
+        return input;
 	}
 	virtual void write(string text){
 		::write(clientID, text.c_str(), text.length());
+		///send(clientID, text.c_str(), text.size(), 0);
 	}
 	virtual void write(float f){
-		::write(clientID, to_string(f).c_str(), to_string(f).length());
+		string ff = to_string(f);
+		while (ff.size() > 0 && ff[ff.size() - 1] == '0')
+		{
+			ff.pop_back();
+		}
+		write(ff);
 	}
 	virtual void read(float* f){
-		recv(clientID, f, sizeof(*f), 0);
+		float ff = *f;
+		::read(clientID, &ff, sizeof(ff));
 	}
 	void setClientID(int sID){
 		clientID=sID;
@@ -425,6 +435,7 @@ class CommandFiveUploadAnomalies: public Command{
 			{
 				fpRate = (float)(((int)(fpRate*1000)) % 1000)/1000;
 			}
+			string STPRate = to_string(tpRate);
 			this->getDio()->write("True Positive Rate: ");
 			this->getDio()->write(tpRate);
 			this->getDio()->write("\n");

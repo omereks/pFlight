@@ -30,6 +30,17 @@ CMakeFiles/ex4.dir/MainTrain.cpp.o: ../commands.h
 CMakeFiles/ex4.dir/MainTrain.cpp.o: ../minCircle.h
 CMakeFiles/ex4.dir/MainTrain.cpp.o: ../timeseries.h
 
+CMakeFiles/ex4.dir/Server.cpp.o: ../AnomalyDetector.h
+CMakeFiles/ex4.dir/Server.cpp.o: ../CLI.h
+CMakeFiles/ex4.dir/Server.cpp.o: ../HybridAnomalyDetector.h
+CMakeFiles/ex4.dir/Server.cpp.o: ../Server.cpp
+CMakeFiles/ex4.dir/Server.cpp.o: ../Server.h
+CMakeFiles/ex4.dir/Server.cpp.o: ../SimpleAnomalyDetector.h
+CMakeFiles/ex4.dir/Server.cpp.o: ../anomaly_detection_util.h
+CMakeFiles/ex4.dir/Server.cpp.o: ../commands.h
+CMakeFiles/ex4.dir/Server.cpp.o: ../minCircle.h
+CMakeFiles/ex4.dir/Server.cpp.o: ../timeseries.h
+
 CMakeFiles/ex4.dir/SimpleAnomalyDetector.cpp.o: ../AnomalyDetector.h
 CMakeFiles/ex4.dir/SimpleAnomalyDetector.cpp.o: ../SimpleAnomalyDetector.cpp
 CMakeFiles/ex4.dir/SimpleAnomalyDetector.cpp.o: ../SimpleAnomalyDetector.h

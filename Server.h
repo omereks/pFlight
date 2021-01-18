@@ -26,11 +26,12 @@ class ClientHandler{
 
 // edit your AnomalyDetectionHandler class here
 class AnomalyDetectionHandler:public ClientHandler{
+	DefaultIO* dio;
 	public:
     virtual void handle(int clientID){
-		socketIO s;
-		s.setClientID(clientID);
-		CLI cli(&s);
+		this->dio = new socketIO(clientID);
+		//this->dio->setClientID(clientID);
+		CLI cli(this->dio);
 		cli.start();
     }
 };
@@ -38,15 +39,36 @@ class AnomalyDetectionHandler:public ClientHandler{
 
 // implement on Server.cpp
 class Server {
+	bool stopCondition = false;
+	int fd;
+public: 														//////
 	thread* t; // the thread to run the start() method in
-
+	sockaddr_in server;
+	sockaddr_in client;
+	int serverPort;
 	// you may add data members
 
-public:
 	Server(int port) throw (const char*);
 	virtual ~Server();
+	//void thredFunc(server s,ClientHandler& ch);
 	void start(ClientHandler& ch)throw(const char*);
 	void stop();
+	
+	
+	int getFd(){
+		return this->fd;
+	}
+	void setFd(int fd){
+		this->fd = fd;
+	}
+
+	bool getstopCondition(){
+		return this->stopCondition;
+	}
+	void setstopCondition(bool stopCondition){
+		this->stopCondition = stopCondition;
+	}
+
 };
 
 #endif /* SERVER_H_ */

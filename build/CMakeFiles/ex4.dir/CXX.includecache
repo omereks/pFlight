@@ -16,10 +16,6 @@ timeseries.h
 math.h
 /home/omer/BIU/pFlight/math.h
 
-/home/omer/BIU/pFlight/CLI.cpp
-CLI.h
-/home/omer/BIU/pFlight/CLI.h
-
 /home/omer/BIU/pFlight/CLI.h
 string.h
 -
@@ -32,18 +28,22 @@ SimpleAnomalyDetector.h
 minCircle.h
 /home/omer/BIU/pFlight/minCircle.h
 
-/home/omer/BIU/pFlight/MainTrain.cpp
+/home/omer/BIU/pFlight/Server.cpp
 iostream
+-
+string.h
 -
 fstream
 -
-sys/types.h
+vector
 -
+sstream
+/home/omer/BIU/pFlight/sstream
+math.h
+/home/omer/BIU/pFlight/math.h
 sys/socket.h
 -
 netinet/in.h
--
-netdb.h
 -
 pthread.h
 -
@@ -53,11 +53,7 @@ stdio.h
 -
 stdlib.h
 -
-string.h
--
 unistd.h
--
-time.h
 -
 Server.h
 /home/omer/BIU/pFlight/Server.h
